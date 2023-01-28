@@ -24,7 +24,7 @@ public class Util
     }
 
     // FindChild { 
-    // ������Ʈ�� �ڽ��� �ڵ����� ��ġ�ϴ� �Լ� 
+    // 오브젝트의 자식을 자동으로 서치하는 함수 
     public static T FindChild<T>(GameObject go, string name = null, bool recursive = false) where T : UnityEngine.Object
     {
         if (go == null)

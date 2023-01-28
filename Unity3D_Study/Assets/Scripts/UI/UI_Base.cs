@@ -33,7 +33,7 @@ public class UI_Base : MonoBehaviour
         }
     }
 
-    //���� ���� �Լ�
+    //꺼내 쓰는 함수
     protected T Get<T>(int idx) where T : UnityEngine.Object
     {
         UnityEngine.Object[] objects = null;
@@ -56,8 +56,8 @@ public class UI_Base : MonoBehaviour
         switch (type)
         {
             case Define.UIEvent.Click :
-                evt.OnDragHandler -= action;
-                evt.OnDragHandler += action;
+                evt.OnClickHandler -= action;
+                evt.OnClickHandler += action;
                 break;
             case Define.UIEvent.Drag:
                 evt.OnDragHandler -= action;
