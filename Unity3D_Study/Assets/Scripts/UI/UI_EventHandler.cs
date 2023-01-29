@@ -13,7 +13,7 @@ public class UI_EventHandler : MonoBehaviour,IPointerClickHandler, IDragHandler
     {
         if (OnClickHandler != null)
             OnClickHandler.Invoke(eventData);
-    }
+    } 
 
     public void OnDrag(PointerEventData eventData)
     {

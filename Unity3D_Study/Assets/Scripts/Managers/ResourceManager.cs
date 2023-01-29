@@ -16,7 +16,7 @@ public class ResourceManager
             GameObject go = Managers.Pool.GetOriginal(name);
             if (go != null)
                 return go as T;
-        }
+        } 
 
         return Resources.Load<T>(path);
     }
@@ -32,12 +32,17 @@ public class ResourceManager
         
         }
 
-        // 2.È¤½Ã ºÒ·®µÈ ¾Ö°¡ ÀÖÀ»±î?
-        if (original.GetComponent<Poolable>() != null)
-            return Managers.Pool.Pop(original, parent).gameObject;
+        // 2.í˜¹ì‹œ ë¶ˆëŸ‰ëœ ì• ê°€ ìˆì„ê¹Œ?
+        //if (original.GetComponent<Poolable>() != null)
+            //return Managers.Pool.Pop(original, parent).gameObject;
 
         GameObject go = Object.Instantiate(original, parent);
-        go.name = original.name;
+        int index = go.name.IndexOf("(Clone)");
+        if (index >= 0)
+        {
+            go.name = go.name.Substring(0, index);
+        }
+        //go.name = original.name;
         return go;
     }
 
@@ -46,7 +51,7 @@ public class ResourceManager
         if (go == null)
             return;
 
-        //¸¸¾à¿¡ Ç®¸µÀÌ ÇÊ¿äÇÑ ¾ÆÀÌ¶ó¸é -> Ç®¸µ ¸Å´ÏÀúÇÑÅ× À§Å¹
+        //ë§Œì•½ì— í’€ë§ì´ í•„ìš”í•œ ì•„ì´ë¼ë©´ -> í’€ë§ ë§¤ë‹ˆì €í•œí…Œ ìœ„íƒ
         Poolable poolable = go.GetComponent<Poolable>();
         if (poolable != null)
         {

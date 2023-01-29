@@ -21,7 +21,7 @@ public class Util
             return null;
         }
         return transform.gameObject;
-    }
+    } 
 
     // FindChild { 
     // 오브젝트의 자식을 자동으로 서치하는 함수 

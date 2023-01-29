@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 
-//∏ÆΩ∫≥  ∆–≈œ
+//Î¶¨Ïä§ÎÑà Ìå®ÌÑ¥
 public class InputManager
 {
     public Action KeyAction = null;

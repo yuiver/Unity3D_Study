@@ -14,7 +14,7 @@ public class Define
     { 
         Press,
         Click,
-    }
+    } 
     public enum CameraMode
     { 
         QuaterView,

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Managers : MonoBehaviour
 {
-    static Managers s_instance; // À¯ÀÏ¼ºÀÌ º¸ÀåµÈ´Ù.
-    static Managers Instance { get { Init(); return s_instance; } } // À¯ÀÏÇÑ ¸Å´ÏÀú¸¦ °®°í¿Â´Ù.
+    static Managers s_instance; // ìœ ì¼ì„±ì´ ë³´ì¥ëœë‹¤.
+    static Managers Instance { get { Init(); return s_instance; } } // ìœ ì¼í•œ ë§¤ë‹ˆì €ë¥¼ ê°–ê³ ì˜¨ë‹¤.
 
     InputManager _input = new InputManager();
     PoolManager _pool = new PoolManager();
@@ -24,7 +24,7 @@ public class Managers : MonoBehaviour
     void Update()
     {
         _input.OnUpdate();
-    }
+    } 
     static void Init()
     {
         GameObject go = GameObject.Find("@Managers");

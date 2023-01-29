@@ -5,7 +5,7 @@ using UnityEngine;
 using static UnityEngine.UI.Image;
 
 public class PoolManager
-{
+{ 
     #region Pool
     class Pool
     {

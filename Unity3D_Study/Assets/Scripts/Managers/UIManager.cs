@@ -6,7 +6,7 @@ public class UIManager
 {
     int _order = 10;
 
-    //Ω∫≈ÿ ±∏¡∂
+    //Ïä§ÌÖç Íµ¨Ï°∞
     Stack<UI_Popup> _popupStack = new Stack<UI_Popup>();
     UI_Scene _sceneUI= null;
 
@@ -38,17 +38,33 @@ public class UIManager
         else
         {
             canvas.sortingOrder = 0;
-        }
+        } 
     }
 
-    public T ShowSceneupUI<T>(string name = null) where T : UI_Scene
+    public T MakeSubItem<T>(Transform parent = null, string name = null) where T : UI_Base
+    {
+        if (string.IsNullOrEmpty(name))
+        {
+            name = typeof(T).Name;
+        }      
+
+        GameObject go = Managers.Resource.Instantiate($"UI/SubItem/{name}");
+
+        if (parent != null)
+        {
+            go.transform.SetParent(parent);
+        }
+
+        return Util.GetOrAddComponent<T>(go);
+    }
+    public T ShowSceneUI<T>(string name = null) where T : UI_Scene
     {
         if (string.IsNullOrEmpty(name))
         {
             name = typeof(T).Name;
         }
 
-        GameObject go = Managers.Resource.Instantiate($"UI/Popup/{name}");
+        GameObject go = Managers.Resource.Instantiate($"UI/Scene/{name}");
         T sceneUI = Util.GetOrAddComponent<T>(go);
         _sceneUI = sceneUI;
 
