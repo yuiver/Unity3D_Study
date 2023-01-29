@@ -16,15 +16,6 @@ public class PlayerController : MonoBehaviour
     {
         Managers.Input.MouseAction -= OnMouseClicked;
         Managers.Input.MouseAction += OnMouseClicked;
-
-        //Managers.Resource.Instantiate("UI/UI_Button");
-
-        //TEMP
-        Managers.UI.ShowSceneUI<UI_Inven>();
-        //Managers.UI.ShowPopupUI<UI_Button>();
-
-        //UI_Button ui =
-        //Managers.UI.ClosePopupUI(ui);
     }
 
     public enum PlayerState
@@ -54,15 +45,15 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), 20 * Time.deltaTime);
         }
 
-        // ¾Ö´Ï¸ŞÀÌ¼Ç
+        // ì• ë‹ˆë©”ì´ì…˜
         Animator anim = GetComponent<Animator>();
-        // ÇöÀç °ÔÀÓ »óÅÂ¿¡ ´ëÇÑ Á¤º¸¸¦ ³Ñ°ÜÁØ´Ù
+        // í˜„ì¬ ê²Œì„ ìƒíƒœì— ëŒ€í•œ ì •ë³´ë¥¼ ë„˜ê²¨ì¤€ë‹¤
         anim.SetFloat("speed", _speed);
     }
 
     void UpdateIdle()
     {
-        //¾Ö´Ï¸ŞÀÌ¼Ç
+        //ì• ë‹ˆë©”ì´ì…˜
         Animator anim = GetComponent<Animator>();
         anim.SetFloat("speed", 0);
 
@@ -121,24 +112,24 @@ public class PlayerController : MonoBehaviour
             //return;
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        //¸¶¿ì½ºÀÇ À§Ä¡·Î ¸ŞÀÎÄ«¸Ş¶óÀÇ À§Ä¡ºÎÅÍ ¸¶¿ì½º°¡ ÀÖ´Â ½ºÅ©¸°ÀÇ À§Ä¡·Î ±¤¼±À» ½ğ´Ù´Â ¶æ
+        //ë§ˆìš°ìŠ¤ì˜ ìœ„ì¹˜ë¡œ ë©”ì¸ì¹´ë©”ë¼ì˜ ìœ„ì¹˜ë¶€í„° ë§ˆìš°ìŠ¤ê°€ ìˆëŠ” ìŠ¤í¬ë¦°ì˜ ìœ„ì¹˜ë¡œ ê´‘ì„ ì„ ìœë‹¤ëŠ” ëœ»
 
         Debug.DrawRay(Camera.main.transform.position, ray.direction * 100, Color.red, 1.0f);
-        //·¹ÀÌÄ³½ºÆ®¸¦ ±×·Á¼­ µğ¹ö±×·Î º»´Ù ([¸ŞÀÎÄ«¸Ş¶ó À§Ä¡ºÎÅÍ],[Á÷¼±ÀÇ ºû * °Å¸®],[±¤¼±ÀÇ »ö],[½Ã°£]
+        //ë ˆì´ìºìŠ¤íŠ¸ë¥¼ ê·¸ë ¤ì„œ ë””ë²„ê·¸ë¡œ ë³¸ë‹¤ ([ë©”ì¸ì¹´ë©”ë¼ ìœ„ì¹˜ë¶€í„°],[ì§ì„ ì˜ ë¹› * ê±°ë¦¬],[ê´‘ì„ ì˜ ìƒ‰],[ì‹œê°„]
 
 
-        //·¹ÀÌÄ³½ºÆ®¿¡ ¸ÂÀº ¹«¾ğ°¡·Î ºÎÅÍ Á¤º¸¸¦ ¾ò¾î¿À´Â º¯¼ö
+        //ë ˆì´ìºìŠ¤íŠ¸ì— ë§ì€ ë¬´ì–¸ê°€ë¡œ ë¶€í„° ì •ë³´ë¥¼ ì–»ì–´ì˜¤ëŠ” ë³€ìˆ˜
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 100.0f, LayerMask.GetMask("Wall")))
-        //¹°¸®¿É¼Ç.·¹ÀÌÄ³½ºÆ®([¾î¶²±¤¼±ÀÎÁö],[±¤¼±¿¡ ¸ÂÀº »ç¹°Á¤º¸],[ÃÖ´ë°Å¸®],[¾î¶² ·¹ÀÌ¾îÀÇ Á¤º¸¸¸ È£ÃâÇÒÁö])
+        //ë¬¼ë¦¬ì˜µì…˜.ë ˆì´ìºìŠ¤íŠ¸([ì–´ë–¤ê´‘ì„ ì¸ì§€],[ê´‘ì„ ì— ë§ì€ ì‚¬ë¬¼ì •ë³´],[ìµœëŒ€ê±°ë¦¬],[ì–´ë–¤ ë ˆì´ì–´ì˜ ì •ë³´ë§Œ í˜¸ì¶œí• ì§€])
         {
             _destPos = hit.point;
             _state = PlayerState.Moving;
             //Debug.Log($"Raycast Camera @ {hit.collider.gameObject.name}");
-            //µğ¹ö±×·Î±×¸¦ È£ÃâÇÑ´Ù [Raycast Camera @ [Ãæµ¹°¨Áö¿Í ·¹ÀÌÄ³½ºÆ®°¡ Ãæµ¹ÇÑ ¿ÀºêÁ§Æ®ÀÇ ÀÌ¸§À» °¡Á®¿Â´Ù.]]
+            //ë””ë²„ê·¸ë¡œê·¸ë¥¼ í˜¸ì¶œí•œë‹¤ [Raycast Camera @ [ì¶©ëŒê°ì§€ì™€ ë ˆì´ìºìŠ¤íŠ¸ê°€ ì¶©ëŒí•œ ì˜¤ë¸Œì íŠ¸ì˜ ì´ë¦„ì„ ê°€ì ¸ì˜¨ë‹¤.]]
 
             //Debug.Log($"Raycast Camera @ {hit.collider.gameObject.tag}");
-            //µğ¹ö±×·Î±×¸¦ È£ÃâÇÑ´Ù [Raycast Camera @ [±¤¼±.Ãæµ¹.¿ÀºêÁ§Æ®.ÅÂ±×(Ãæµ¹°¨Áö¿Í ·¹ÀÌÄ³½ºÆ®°¡ Ãæµ¹ÇÑ ¿ÀºêÁ§Æ®ÀÇ ÅÂ±×¸¦ °¡Á®¿Â´Ù.)
+            //ë””ë²„ê·¸ë¡œê·¸ë¥¼ í˜¸ì¶œí•œë‹¤ [Raycast Camera @ [ê´‘ì„ .ì¶©ëŒ.ì˜¤ë¸Œì íŠ¸.íƒœê·¸(ì¶©ëŒê°ì§€ì™€ ë ˆì´ìºìŠ¤íŠ¸ê°€ ì¶©ëŒí•œ ì˜¤ë¸Œì íŠ¸ì˜ íƒœê·¸ë¥¼ ê°€ì ¸ì˜¨ë‹¤.)
         }
     }
 }
