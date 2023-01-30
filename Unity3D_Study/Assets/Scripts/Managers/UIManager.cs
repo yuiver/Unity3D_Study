@@ -120,4 +120,10 @@ public class UIManager
             ClosePopupUI();
         }   //while()
     }
+
+    public void Clear()
+    { 
+        CloseAllPopupUI();
+        _sceneUI = null;
+    }
 }
