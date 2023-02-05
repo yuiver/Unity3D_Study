@@ -22,7 +22,7 @@ public class PoolManager
 
             for (int i = 0; i < count; i++)
             {
-                Create();
+                Push(Create());
             }
         }
 
@@ -56,8 +56,10 @@ public class PoolManager
 
             poolable.gameObject.SetActive(true);
 
-            //if(parnet == null)
-            //    poolable.transform.parent = Managers.FindSceneObjectsOfType().CurrentScene.transform;
+
+            // DontDestroyOnLoad 해제 용도
+            if (parnet == null)
+                poolable.transform.parent = Managers.Scene.CurrentScene.transform;
 
             poolable.transform.parent = parnet;
             poolable.IsUsing = true;
@@ -91,6 +93,8 @@ public class PoolManager
     public void Push(Poolable poolable)
     {
         string name = poolable.gameObject.name;
+
+        //정말정말 예외적인 경우 팝이 없는상황에서 푸쉬하는 경우 보호장치 예:에디터에서 드래그로 만들었을때
         if (_pool.ContainsKey(name) == false)
         { 
             GameObject.Destroy(poolable.gameObject);

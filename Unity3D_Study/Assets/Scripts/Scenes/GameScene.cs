@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameScene : BaseScene
 {
+
     protected override void Init()
     { 
         base.Init();
@@ -17,11 +19,15 @@ public class GameScene : BaseScene
 
         //UI_Button ui =
         //Managers.UI.ClosePopupUI(ui);
+
+        //for (int i = 0; i < 5; i++)
+        //Managers.Resource.Instantiate("UnityChan");
+
+        Dictionary<int,Stat> dict = Managers.Data.StatDict;
+ 
     }
     public override void Clear()
     {
      
     }
-
-
 }
